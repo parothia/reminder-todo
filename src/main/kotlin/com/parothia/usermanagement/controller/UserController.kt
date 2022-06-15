@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @RestController
 @RequestMapping(value = ["/api/v1"], produces = ["application/json"])
@@ -22,7 +23,7 @@ class UserController : AbstractService() {
     private lateinit var userService: UserService
 
     @PostMapping("/user")
-    fun createUser(@RequestBody request: GenericRequestDTO<UserDTO>): ResponseEntity<ResponseDTO> {
+    fun createUser(@Valid @RequestBody request: GenericRequestDTO<UserDTO>): ResponseEntity<ResponseDTO> {
         logger.log(Level.INFO, "[Endpoint: /api/v1/user]<-[Request: ${request}]")
         val response = userService.createUser(request.data)
         return ResponseEntity.ok()

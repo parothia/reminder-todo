@@ -1,5 +1,7 @@
 package com.parothia.usermanagement.db
 
+import com.parothia.shared.enum.UserActivationStatus
+import com.parothia.shared.enum.UserType
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import javax.persistence.*
@@ -15,29 +17,47 @@ data class UserEntity(
     var username: String,
 
     @Column(nullable = false)
-    val contact: String,
+    var contact: String,
 
     @Column(nullable = false)
-    val email: String,
+    var email: String,
 
     @Column(nullable = false)
-    val status: String = "",
+    @Enumerated(EnumType.STRING)
+    val status: UserActivationStatus,
 
     @Column(nullable = false)
-    val firstName: String,
+    var firstName: String,
 
     @Column(nullable = false)
-    val lastName: String,
+    var lastName: String,
 
     @Column(nullable = false)
-    val userType: String = "",
+    @Enumerated(EnumType.STRING)
+    val userType: UserType,
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     val remindAt: ZonedDateTime = ZonedDateTime.now(ZoneOffset.UTC)
 
+) {
+    constructor() : this(null, "", "", "", UserActivationStatus.INACTIVE, "", "", UserType.USER)
+    constructor(
+        email: String,
+        fullName: String,
+        contact: String,
+        firstName: String,
+        lastName: String,
+        userType: String
+    ) : this(
+        null,
+        firstName + lastName,
+        contact,
+        email,
+        UserActivationStatus.INACTIVE,
+        firstName,
+        lastName,
+        UserType.USER,
+    )
+}
 
-)
 
-//enum class UserType {
-//    ADMIN, USER
-//}

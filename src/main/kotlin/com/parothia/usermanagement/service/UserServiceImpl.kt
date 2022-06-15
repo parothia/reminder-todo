@@ -18,14 +18,16 @@ class UserServiceImpl : UserService {
         if (user != null) {
             throw UserManagementException("User Already Exists")
         } else {
-            user = UserEntity(
-                username = userDTO.username,
-                contact = userDTO.contact,
-                email = userDTO.email,
-                firstName = userDTO.firstName,
+            user = UserEntity().apply {
+                username = userDTO.username
+                contact = userDTO.contact
+                email = userDTO.email
+                firstName = userDTO.firstName
                 lastName = userDTO.lastName
-            )
+            }
             userRepository.save(user)
+            BeanUtils.copyProperties(user, userDTO)
+
         }
         return user
     }
