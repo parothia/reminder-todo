@@ -3,6 +3,7 @@ package com.parothia.mailer.db
 import org.springframework.core.io.InputStreamSource
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.lang.reflect.Constructor
 
 
 data class EmailDetails(

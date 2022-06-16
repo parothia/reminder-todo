@@ -1,5 +1,8 @@
 package com.parothia.usermanagement.service
 
+import com.parothia.mailer.db.EmailDetails
+import com.parothia.mailer.dto.EmailVerificationRequestDTO
+import com.parothia.mailer.service.EmailService
 import com.parothia.usermanagement.UserManagementException
 import com.parothia.usermanagement.db.UserEntity
 import com.parothia.usermanagement.db.UserRepository
@@ -12,6 +15,21 @@ import org.springframework.stereotype.Service
 class UserServiceImpl : UserService {
     @Autowired
     private lateinit var userRepository: UserRepository
+
+    @Autowired
+    private lateinit var emailService: EmailService
+
+
+    internal fun sendVerificationMail(user: UserDTO) {
+        val emailDetails = EmailDetails(
+            user.email,
+            "noreplay@parothia.in",
+            "Verification Mail on SignIn",
+            "This is a verification Mail from Parothia. Please click on below link to verify the authenticity of user ",
+            emptyList()
+        )
+        emailService.sendSimpleEmail(emailDetails)
+    }
 
     fun findOrCreateUser(userDTO: UserDTO): UserEntity {
         var user = userRepository.findByEmail(userDTO.email)
@@ -27,7 +45,7 @@ class UserServiceImpl : UserService {
             }
             userRepository.save(user)
             BeanUtils.copyProperties(user, userDTO)
-
+            sendVerificationMail(userDTO)
         }
         return user
     }

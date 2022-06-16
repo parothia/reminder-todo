@@ -4,6 +4,7 @@ import com.parothia.mailer.db.EmailDetails
 import com.parothia.shared.dto.StringSuccessResponseDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
+import org.springframework.mail.MailAuthenticationException
 import org.springframework.mail.MailException
 import org.springframework.mail.MailSendException
 import org.springframework.mail.SimpleMailMessage
@@ -11,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import javax.security.sasl.AuthenticationException
 
 @Service
 class EmailServiceImpl : EmailService {
@@ -26,6 +28,8 @@ class EmailServiceImpl : EmailService {
             simpleMailMessage.setText(user.content)
             javaMailSender.send(simpleMailMessage)
             return StringSuccessResponseDTO("Email sent to ${user.to}")
+        } catch (ex: MailAuthenticationException) {
+            throw MailSendException("Authentication Failure")
         } catch (ex: MailException) {
             throw MailSendException("Failed to send Email")
         }
