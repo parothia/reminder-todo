@@ -24,7 +24,7 @@ data class UserEntity(
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    val status: UserActivationStatus,
+    var status: UserActivationStatus,
 
     @Column(nullable = false)
     var firstName: String,
