@@ -61,4 +61,8 @@ class UserServiceImpl : UserService {
     override fun createUser(request: UserDTO) {
         request.let { dto -> BeanUtils.copyProperties(processUserRegistration(request), dto) }
     }
+
+    override fun getAllUsers(): MutableList<UserEntity> {
+        return userRepository.findAll()
+    }
 }
