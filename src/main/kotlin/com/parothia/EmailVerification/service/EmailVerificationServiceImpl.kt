@@ -36,9 +36,9 @@ class EmailVerificationServiceImpl : EmailVerificationService {
         return emailToken
     }
 
-    override fun getVerificationToken(user: UserDTO): VerificationTokenEntity {
-        return verifyTokenRepository.findTokenByUserId(user.id)
-    }
+//    override fun getVerificationToken(user: UserDTO): String {
+//        return user.id?.let { verifyTokenRepository.findTokenByUserId(it) }
+//    }
 
     override fun verifyUserEmail(token: String): EmailVerificationResponseDTO {
         val verificationToken = verifyTokenRepository.findUserByToken(token)

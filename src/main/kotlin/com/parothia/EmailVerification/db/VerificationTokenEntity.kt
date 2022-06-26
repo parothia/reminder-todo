@@ -6,6 +6,7 @@ import java.time.ZonedDateTime
 import javax.persistence.*
 
 @Entity
+@Table(name = "VerificationToken")
 data class VerificationTokenEntity(
     @Column(nullable = false)
     val token: String,

@@ -16,6 +16,9 @@ data class UserEntity(
     @Column(nullable = false)
     var username: String,
 
+    @Column(nullable = true)
+    var password: String,
+
     @Column(nullable = false)
     var contact: String,
 
@@ -34,25 +37,27 @@ data class UserEntity(
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    val userType: UserType,
+    val roles: UserType,
 
     @Column(nullable = true)
     val remindAt: ZonedDateTime = ZonedDateTime.now(ZoneOffset.UTC)
 
 ) {
-    constructor() : this(null, "", "", "", UserActivationStatus.INACTIVE, "", "", UserType.USER)
+    constructor() : this(null, "", "", "", "", UserActivationStatus.INACTIVE, "", "", UserType.USER)
     constructor(
         email: String,
         fullName: String,
         contact: String,
         firstName: String,
         lastName: String,
-        userType: String
+        userType: String,
+        password: String,
     ) : this(
         null,
         firstName + lastName,
         contact,
         email,
+        password,
         UserActivationStatus.INACTIVE,
         firstName,
         lastName,

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 interface EmailVerificationService {
-    fun getVerificationToken(user: UserDTO): VerificationTokenEntity
+    //    fun getVerificationToken(user: UserDTO): String
     fun verifyUserEmail(token: String): EmailVerificationResponseDTO
     fun generateVerificationToken(userId: Long): String
 }
