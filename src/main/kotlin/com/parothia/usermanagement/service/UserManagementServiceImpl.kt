@@ -111,7 +111,7 @@ class UserManagementServiceImpl : UserManagementService {
     override fun loadUserByUsername(username: String): UserDetails {
 //        val userEntity = userRepository.findByEmail(username)
 //        userEntity.let {
-        return User(
+        return MyUserDetails(
             username,
             BCryptPasswordEncoder().encode("pass"),
             true,
