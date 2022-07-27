@@ -9,4 +9,8 @@ class TagServiceImpl : TagService {
 
     @Autowired
     private lateinit var tagRepo: TagRepo
+
+    override fun addTag(tagName: String) {
+        TODO("Not yet implemented")
+    }
 }

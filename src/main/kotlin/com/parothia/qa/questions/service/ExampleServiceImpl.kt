@@ -9,4 +9,15 @@ class ExampleServiceImpl : ExampleService {
 
     @Autowired
     private lateinit var exampleRepo: ExampleRepo
+    override fun addExample() {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteExample() {
+        TODO("Not yet implemented")
+    }
+
+    override fun editExample() {
+        TODO("Not yet implemented")
+    }
 }

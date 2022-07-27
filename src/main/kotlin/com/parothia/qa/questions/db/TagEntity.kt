@@ -9,7 +9,7 @@ class TagEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
-    @Column(name = "tag")
-    var tag: String = ""
+    @Column(name = "tag_name")
+    var tagName: String = ""
 
 }

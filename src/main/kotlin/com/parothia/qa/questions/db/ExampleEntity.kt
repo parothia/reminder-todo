@@ -7,7 +7,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity(name = "example_entity")
-class ExampleEntity {
+class ExampleEntity(example: String) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +15,4 @@ class ExampleEntity {
 
     @Column(name = "example")
     var example: String = ""
-
-    
 }
